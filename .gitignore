@@ -24,3 +24,6 @@ Thumbs.db
 # Docker
 *.env.docker
 docker-compose.override.yml
+
+#Fast Api postman file
+FAST_API.postman_collection.json
