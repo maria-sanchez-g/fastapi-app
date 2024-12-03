@@ -1,0 +1,171 @@
+# Dockerized Flask API
+This project is a Dockerized FastAPI application. It includes Microsoft Authentication and provides a way to secure the FasAPI using Microsoft authentication.
+
+## 1.Setup Python environment
+### Prerequisites
+
+- Open Docker desktop
+- Python 3.9 installed
+
+```bash
+python -m venv venv
+```
+```bash
+.\venv\Scripts\activate
+```
+```bash
+
+pip freeze > requirements.txt
+```
+**To reactivate the environment
+.\.venv\Scripts\Activate**
+
+## 2.Create a FastAPI app.py
+
+#### Test
+```bash
+docker-compose up –build
+ `http://localhost:4000
+```
+### 3.Add Dockerfile and docker-compose.yml
+#### Test
+```bash
+Docker-compose up –build
+http://127.0.0.1:4000
+```
+
+## 4.Check for dependencies conflicts
+```bash
+pip check
+```
+## 5.Contributing guide
+1. Create/Clone a new repository in Git Hub
+
+2. Create a pull request
+```bash
+git init
+git add .
+git commit -m "initial commit"
+git remote add origin https://github.com/maria-sanchez-g/fastapi-app.git
+git branch -M main
+git push -u origin main
+```
+3. Create a new branch
+```bash
+git checkout -b feature-branch
+git add .
+git commit -m
+git push origin feature-branch
+```
+
+## 6.Create an API request in Postman
+1. New Collection called FAST_API
+```bash
+Add request
+URL http://localhost:4000/ for FastAPI
+GET request
+Body:
+{
+    "key": "value"
+}
+
+SEND
+SAVE
+```
+2. Export Postman request
+```bash
+Collections / Export / Collection v2.1 / Save file into the project directory in Visual Studio Code
+```
+## 7.Microsoft Authentication using OAuth2.0 
+1. Register application in Azure
+```bash
+Azure / Active Directory / App registration / New registration
+Set up name: FastAPI App
+Set up URI: http://localhost:4000/callback
+Register
+Copy the details of: Application (client) ID / Directory (tenant) ID / Value / Secret ID
+```
+```bash
+2. Install python lbraries in Visual Studio
+pip install msal flask
+```
+```bash
+3. Configure Environment Variables
+Create an .env file/copy the .env.example / add: 
+
+CLIENT_ID=<Your Application (client) ID>
+CLIENT_SECRET=<Your Client Secret Value>
+TENANT_ID=<Your Directory (tenant) ID>
+SCOPES=https://graph.microsoft.com/.default
+REDIRECT_URI=http://localhost:4000/callback
+```
+4. Load Variables
+```bash
+pip install python-dotenv
+```
+5. Update requirements file
+```bash
+pip install python-dotenv
+pip freeze > requirements.txt
+```
+6.Modify middleware.py
+
+7. Create Gitignore file
+```
+# Environment files
+.env
+
+# Python virtual environments
+venv/
+.venv/
+
+# Compiled bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs
+*.log
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# IDE/Editor configurations
+.vscode/
+.idea/
+
+# Docker
+*.env.docker
+docker-compose.override.yml
+
+#Fast Api postman file
+FAST_API.postman_collection.json
+```
+#### Test
+```bash
+python app.py
+http://localhost:4000/login
+Save the Token field
+```
+## 8.Postman for Authentication
+1. Collection / FAST_API / Authorization
+
+1.1 Create POST request
+```
+POST to https://login.microsoftonline.com/cd8d0fdb-f6c8-4bdb-a004-d4662e028729/oauth2/v2.0/token
+
+In Body select x-www-form-urlencoded and add:
+-grant_type / client_credentials
+-client_id / add number from Azure
+-client_secret / add number from Azure
+-Scope / https://graph.microsoft.com/.default
+```
+Copy the bearer token
+
+1.2 Create GET request to http://localhost:4000/secure-data
+```bash
+-Headers / Authorization / Bearer and pastethe access token you received
+```
+## 9.README file
+1. Createa README file
